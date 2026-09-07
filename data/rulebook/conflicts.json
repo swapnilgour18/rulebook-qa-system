@@ -1,0 +1,47 @@
+[
+  {
+    "conflict_id": "C001",
+    "topic": "Attendance Requirement",
+    "section_a": {
+      "document": "attendance_policy.md",
+      "section": "2.1",
+      "rule": "All students must maintain a minimum attendance of 75% in each registered course."
+    },
+    "section_b": {
+      "document": "attendance_policy.md",
+      "section": "2.3",
+      "rule": "Students with an approved medical exemption must maintain a minimum attendance of 60% in each registered course."
+    },
+    "description": "Section 2.1 requires 75% attendance for all students, while Section 2.3 requires 60% attendance for students with an approved medical exemption. Neither section explicitly states which rule takes precedence."
+  },
+  {
+    "conflict_id": "C002",
+    "topic": "Even Semester 2027 Fee Deadline",
+    "section_a": {
+      "document": "academic_regulations.md",
+      "section": "4.1",
+      "rule": "The semester fee for Even Semester 2027 is due by 10 March 2027."
+    },
+    "section_b": {
+      "document": "fee_deadlines.csv",
+      "section": "4.1",
+      "rule": "The Semester Fee for Even Semester 2027 has a due date of 15 March 2027."
+    },
+    "description": "Section 4.1 of academic_regulations.md states 10 March 2027, while the fee_deadlines.csv entry referenced to Section 4.1 states 15 March 2027."
+  },
+  {
+    "conflict_id": "C003",
+    "topic": "Hostel Curfew and Late Entry",
+    "section_a": {
+      "document": "hostel_rules.md",
+      "section": "6.3",
+      "rule": "Residents must return to the hostel by 10:00 PM. Returning after 10:00 PM constitutes a curfew violation."
+    },
+    "section_b": {
+      "document": "hostel_rules.md",
+      "section": "6.4",
+      "rule": "Residents may enter the hostel until 11:00 PM. Entry before 11:00 PM does not constitute a curfew violation."
+    },
+    "description": "Section 6.3 treats entry after 10:00 PM as a violation, while Section 6.4 permits entry until 11:00 PM without treating it as a violation."
+  }
+]

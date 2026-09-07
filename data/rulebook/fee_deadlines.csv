@@ -1,0 +1,16 @@
+Fee Component,Applicable Semester,Due Date,Late Fee Applicable After,Late Fee Amount,Section Reference
+Semester Fee,Even Semester 2027,15 March 2027,15 March 2027,INR 500 per week of delay,4.1
+Tuition Fee (Odd Semester),Odd Semester 2026,10 August 2026,10 August 2026,INR 500 per week of delay,4.1
+Examination Fee (End-Semester),Odd Semester 2026,20 November 2026,20 November 2026,INR 300 flat,3.1
+Examination Fee (End-Semester),Even Semester 2027,20 April 2027,20 April 2027,INR 300 flat,3.1
+Late Examination Registration Fee,Odd Semester 2026,27 November 2026,Not Applicable,INR 750 flat,3.1
+Late Examination Registration Fee,Even Semester 2027,27 April 2027,Not Applicable,INR 750 flat,3.1
+Hostel Fee (Odd Semester),Odd Semester 2026,10 August 2026,10 August 2026,INR 500 per week of delay,6.1
+Hostel Fee (Even Semester),Even Semester 2027,10 March 2027,10 March 2027,INR 500 per week of delay,6.1
+Re-Examination Fee (per course),Odd Semester 2026,15 January 2027,Not Applicable,INR 1000 per course,3.6
+Re-Examination Fee (per course),Even Semester 2027,15 June 2027,Not Applicable,INR 1000 per course,3.6
+Supplementary Examination Fee (per course),Odd Semester 2026,10 February 2027,Not Applicable,INR 800 per course,3.7
+Supplementary Examination Fee (per course),Even Semester 2027,10 July 2027,Not Applicable,INR 800 per course,3.7
+Library Deposit (New Admissions),Odd Semester 2026,10 August 2026,Not Applicable,Refundable, No Late Fee,1.4
+Late Registration Fee,Odd Semester 2026,15 August 2026,Not Applicable,INR 400 flat,1.4
+Late Registration Fee,Even Semester 2027,12 January 2027,Not Applicable,INR 400 flat,1.4

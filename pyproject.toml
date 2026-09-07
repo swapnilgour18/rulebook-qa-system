@@ -1,0 +1,22 @@
+[project]
+name = "rulebook-qa-system"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Swapnil Gour", email = "swapnilgour1122@gmail.com" }
+]
+requires-python = ">=3.11.9"
+dependencies = [
+    "chromadb>=1.5.9",
+    "fastapi>=0.141.1",
+    "langchain>=1.4.0",
+    "langchain-chroma>=1.1.0",
+    "langchain-community>=0.4.2",
+    "langchain-google-genai>=4.4.0",
+    "langchain-text-splitters>=1.1.2",
+    "pypdf>=6.18.0",
+    "python-dotenv>=1.2.3",
+    "uvicorn>=0.52.4",
+]
+
