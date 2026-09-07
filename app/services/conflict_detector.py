@@ -26,7 +26,41 @@ def chunk_matches_rule(chunk: Dict[str, Any], rule_def: Dict[str, str]) -> bool:
             
     return False
 
-def detect_conflicts(retrieved_chunks: List[Dict[str, Any]]) -> Dict[str, Any]:
+def is_conflict_relevant(query: str, conflict_id: str) -> bool:
+    """
+    Checks if the user's query is conceptually relevant to the specific conflict.
+    """
+    q = query.lower()
+    
+    if conflict_id == "C001":
+        # Attendance conflict
+        if "attendance" not in q:
+            return False
+        if "minimum" in q or "medical exemption" in q or "lower" in q:
+            return True
+        return False
+        
+    elif conflict_id == "C002":
+        # Fee conflict
+        if "fee" not in q and "semester" not in q:
+            return False
+        if "deadline" in q or "due date" in q or "even semester" in q:
+            return True
+        if "due" in q and "due to" not in q:
+            return True
+        return False
+        
+    elif conflict_id == "C003":
+        # Hostel conflict
+        if "hostel" not in q and "resident" not in q:
+            return False
+        if "curfew" in q or "return" in q or "time" in q or "late" in q:
+            return True
+        return False
+        
+    return True
+
+def detect_conflicts(query: str, retrieved_chunks: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
     Examines retrieved chunks to determine if any genuine known contradictions are present.
     Treats conflicts.json as configuration.
@@ -49,12 +83,16 @@ def detect_conflicts(retrieved_chunks: List[Dict[str, Any]]) -> Dict[str, Any]:
     detected_conflicts = []
     
     for conflict in known_conflicts:
+        # 1. Check if conflict is relevant to the query
+        if not is_conflict_relevant(query, conflict["conflict_id"]):
+            continue
+            
         a_matched = False
         b_matched = False
         a_score = None
         b_score = None
         
-        # Check if BOTH sides of the contradiction are present in the retrieved context
+        # 2. Check if BOTH sides of the contradiction are present in the retrieved context
         for chunk in retrieved_chunks:
             if chunk_matches_rule(chunk, conflict["section_a"]):
                 a_matched = True

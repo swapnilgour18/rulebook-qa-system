@@ -5,9 +5,9 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from pydantic import BaseModel, Field
 
 class AnswerResponse(BaseModel):
-    status: str = Field(description="Must be 'ANSWERED' if the context provides the answer, or 'NOT_COVERED' if the context does not contain enough information.")
-    answer: str = Field(description="The concise answer to the question based ONLY on the provided context. Empty string if NOT_COVERED.")
-    passages_used: List[int] = Field(description="List of PASSAGE numbers (1-indexed) that were actually used to formulate the answer. Empty list if NOT_COVERED.")
+    status: str = Field(description="Return 'ANSWERED' ONLY if the exact information is explicitly in the text without concept substitution. Return 'NOT_COVERED' otherwise.")
+    answer: str = Field(description="The concise answer to the question based ONLY on explicit context. Empty string if NOT_COVERED.")
+    passages_used: List[int] = Field(description="List of PASSAGE numbers (1-indexed) used. Empty list if NOT_COVERED.")
 
 def get_llm():
     """Initializes and returns the Gemini text-generation model."""
@@ -53,15 +53,26 @@ def generate_answer(query: str, retrieved_chunks: List[Dict[str, Any]]) -> Dict[
         
     prompt = f"""
 You are a strict, precise answering assistant for a university rulebook.
-You must answer the user's question based ONLY on the provided passages.
+
+CRITICAL INSTRUCTION: ONLY answer a question when the retrieved rulebook context explicitly contains enough information to answer exactly what was asked.
+
+CRITICAL DECISION RULE:
+Before returning ANSWERED, ask:
+"Does the provided context explicitly state the exact information requested by the user, without any derivation, inference, or concept substitution?"
+If the answer is not a direct "yes", you MUST return NOT_COVERED.
 
 RULES:
-1. Do not invent facts.
-2. Do not use outside knowledge.
-3. Do not make assumptions.
-4. Use only the supplied context.
-5. If the context does not answer the question, return status="NOT_COVERED" and an empty answer.
-6. If multiple passages contain relevant information, consider all of them. Provide the answer based on the evidence.
+1. Do not invent facts or use outside knowledge.
+2. Use only the supplied context.
+3. If the context does not answer the question explicitly, return status="NOT_COVERED" and an empty answer.
+4. Do not substitute a related concept for the requested concept. If the specific concept requested is not explicitly discussed in the text, return NOT_COVERED.
+
+
+EXAMPLES:
+
+Question: "What is the minimum attendance requirement?"
+Context: "All students must maintain a minimum attendance of 75%..."
+Output: {{"status": "ANSWERED", "answer": "The minimum attendance requirement is 75%.", "passages_used": [1]}}
 
 QUESTION: {query}
 

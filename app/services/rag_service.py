@@ -15,16 +15,18 @@ def answer_query(query: str) -> Dict[str, Any]:
         }
         
     # 1. Retrieve relevant chunks from ChromaDB
-    chunks = retrieve_relevant_chunks(query, k=5)
-    if not chunks:
+    retrieved_chunks = retrieve_relevant_chunks(query, k=5)
+    if not retrieved_chunks:
         return {
             "status": "NOT_COVERED",
-            "answer": "The rulebook does not provide the requested information.",
+            "answer": "",
             "sources": []
         }
         
+    chunks = retrieved_chunks
+        
     # 2. Detect explicit known contradictions
-    conflict_result = detect_conflicts(chunks)
+    conflict_result = detect_conflicts(query, chunks)
     
     if conflict_result.get("has_conflict"):
         # Format the conflict explanation
